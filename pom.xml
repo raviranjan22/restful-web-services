@@ -35,7 +35,12 @@
       		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
       		<version>2.3.0</version>
   		</dependency>
- 
+ 		<!-- Added for content negotiation, like where wants response in xml -->
+ 		<dependency>
+ 			<groupId>com.fasterxml.jackson.dataformat</groupId>
+ 			<artifactId>jackson-dataformat-xml</artifactId>
+ 		</dependency>
+ 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
