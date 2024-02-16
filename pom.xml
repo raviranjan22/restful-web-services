@@ -30,6 +30,7 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
+		<!-- Added for swagger documentation -->
 		<dependency>
       		<groupId>org.springdoc</groupId>
       		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
