@@ -1,9 +1,13 @@
 package com.ranjan.rest.webservices.restfulwebservices.user;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +35,8 @@ public class UserResource {
 				
 	}
 	
+	//Demonstration of HATEOAS
+	/*
 	@GetMapping("/users/{id}")
 	public User retrieveUser(@PathVariable int id){
 		//return userDaoService.retrieveUser(id);
@@ -38,6 +44,20 @@ public class UserResource {
 		if(retrieveUser == null)
 			throw new UserNotFoundException("User not found");
 		return retrieveUser;
+				
+	}
+	*/
+	@GetMapping("/users/{id}")
+	public EntityModel<User> retrieveUser(@PathVariable int id){
+		//return userDaoService.retrieveUser(id);
+		User retrieveUser = userDaoService.retrieveUser(id);
+		if(retrieveUser == null)
+			throw new UserNotFoundException("User not found");
+		//Demonstration of HATEOAS (Hypermedia as the Engine of Application State) and HAL (JSON Hypertext Application Language)
+		EntityModel<User> entityModel = EntityModel.of(retrieveUser);
+		WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+		entityModel.add(link.withRel("all-users"));
+		return entityModel;
 				
 	}
 	
