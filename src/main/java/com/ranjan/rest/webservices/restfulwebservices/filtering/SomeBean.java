@@ -1,20 +1,20 @@
 package com.ranjan.rest.webservices.restfulwebservices.filtering;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 //@JsonIgnoreProperties({"first_field", "second_field"})
+@JsonFilter("Some-Filter")
 public class SomeBean {
 	
-	@JsonProperty("first_field")
-	@JsonIgnore
+	//@JsonProperty("first_field")
+	//@JsonIgnore
 	private String field1;
 	
-	@JsonProperty("second_field")
-	@JsonIgnore
+	//@JsonProperty("second_field")
+	//@JsonIgnore
 	private String field2;
 	
-	@JsonProperty("third_field")
+	//@JsonProperty("third_field")
 	private String field3;
 	public SomeBean(String field1, String field2, String field3) {
 		super();
