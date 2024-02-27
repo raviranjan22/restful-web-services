@@ -1,10 +1,14 @@
 package com.ranjan.rest.webservices.restfulwebservices.user;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
@@ -20,6 +24,10 @@ public class User {
 	
 	@Past(message="Birth date must be in past")
 	private LocalDate birthDate;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<Post> posts;
 	
 	protected User() {
 		
