@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.ranjan.rest.webservices.restfulwebservices.PostJpaRepository;
 import com.ranjan.rest.webservices.restfulwebservices.UserJpaRepository;
 
 import jakarta.validation.Valid;
@@ -28,6 +29,9 @@ public class UserJpaResource {
 	
 	@Autowired
 	private UserJpaRepository repository;
+	
+	@Autowired
+	private PostJpaRepository postRepository;
 	
 	public UserJpaResource(UserJpaRepository repository) {
 		this.repository = repository;
@@ -87,4 +91,16 @@ public class UserJpaResource {
 			throw new UserNotFoundException("User not found");
 		return retrieveUser.get().getPosts();
 	}
+	
+	@PostMapping("/jpa/users/{id}/post")
+	public ResponseEntity<Object> savePostForUser(@PathVariable int id, @Valid @RequestBody Post post) {
+		Optional<User> retrieveUser = repository.findById(id);
+		if(retrieveUser.isEmpty())
+			throw new UserNotFoundException("User not found");
+		post.setUser(retrieveUser.get());
+		Post savedPost = postRepository.save(post);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedPost.getId()).toUri();
+		return ResponseEntity.created(location).build();
+	
+	} 
 }
