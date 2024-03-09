@@ -25,6 +25,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- Demonstration of springboot security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
 		<!-- Demonstration of HAL Explorer -->
 		<dependency>
     		<groupId>org.springframework.data</groupId>
